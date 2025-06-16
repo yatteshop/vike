@@ -1,23 +1,12 @@
-# example netlify.toml
 [build]
-  command = "npm run dev"
-  functions = "functions"
-  publish = "dist"
-  targetPort = "3000"
+  command = "npm run build"             # ✅ Exécute vike build
+  publish = "dist/client"              # ✅ Cible les fichiers générés
+  functions = "netlify/functions"      # ✅ Cible le dossier de tes fonctions Netlify
 
 [functions]
-  directory = "/functions/"
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/index"
+  to = "/.netlify/functions/ssr"       # ✅ Redirige tout vers ta fonction SSR
   status = 200
-
-  ## (optional) Settings for Netlify Dev
-  ## https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
-  #[dev]
-  #  command = "yarn start" # Command to start your dev server
-  #  port = 3000 # Port that the dev server will be listening on
-  #  publish = "dist" # Folder with the static content for _redirect file
-
-  ## more info on configuring this file: https://docs.netlify.com/configure-builds/file-based-configuration/
