@@ -1,20 +1,13 @@
-const { renderPage } = require("vike/server");
+const { renderPage } = require("vike");
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
   const pageContext = await renderPage({ urlOriginal: event.rawUrl });
-
-  if (!pageContext.httpResponse) {
-    return {
-      statusCode: 200,
-      body: "",
-    };
-  }
-
-  const { statusCode, contentType, body } = pageContext.httpResponse;
+  if (!pageContext.httpResponse) return { statusCode: 200 };
+  console.log(pageContext.httpResponse.statusCode, event.rawUrl);
 
   return {
-    statusCode,
-    headers: { "Content-Type": contentType },
-    body,
+    statusCode: pageContext.httpResponse.statusCode,
+    headers: { "Content-Type": pageContext.httpResponse.contentType },
+    body: pageContext.httpResponse.body,
   };
 };
