@@ -1,12 +1,12 @@
 [build]
-  command = "npm run build"             # ✅ Exécute vike build
-  publish = "dist/client"              # ✅ Cible les fichiers générés
-  functions = "netlify/functions"      # ✅ Cible le dossier de tes fonctions Netlify
+  command = "npm run build"
+  publish = "dist/client"
+  functions = "netlify/functions"
 
 [functions]
   directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/ssr"       # ✅ Redirige tout vers ta fonction SSR
+  to = "/.netlify/functions/ssr"
   status = 200
